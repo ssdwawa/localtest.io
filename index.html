@@ -57,6 +57,8 @@
               console.log(status  , result , lnglat  , lnglat1);
                 if (status === "complete" && result.info === "OK") {
                   alert(JSON.stringify(result) )
+                }else{
+                  alert(status)
                 }
               });
             });
