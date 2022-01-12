@@ -46,23 +46,23 @@
             // data是具体的定位信息
             console.log(data.position);
             AMap.plugin("AMap.Geocoder", function () {
-              var geocoder = new AMap.Geocoder({
-                city:"西安"
-              });
+              var geocoder = new AMap.Geocoder();
            
-              var lnglat = [data.position.lat, data.position.lng];
+              var lnglat1 =[data.position.lng ,data.position.lat];
+              // [data.position.lng ,data.position.lat];
+              var lnglat = [116.396574, 39.992706]
 
-              geocoder.getAddress(lnglat, function (status, result) {
-                alert(status)
-                console.log(status  , result , lnglat);
+              geocoder.getAddress(lnglat1, function (status, result) {
+       
+              console.log(status  , result , lnglat  , lnglat1);
                 if (status === "complete" && result.info === "OK") {
-                  alert(result)
+                  alert(JSON.stringify(result) )
                 }
               });
             });
-            window.open(
-              `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${data.position.lat},${data.position.lng}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`
-            );
+            // window.open(
+            //   `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${data.position.lat},${data.position.lng}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`
+            // );
           }
 
           function onError(data) {
