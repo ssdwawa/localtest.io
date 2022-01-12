@@ -35,7 +35,6 @@
           });
 
           geolocation.getCurrentPosition(function (status, result) {
-         
             if (status == "complete") {
               onComplete(result);
             } else {
@@ -46,9 +45,21 @@
           function onComplete(data) {
             // data是具体的定位信息
             console.log(data.position);
-            window.open( `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${data.position.kT},${data.position.KL}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`); 
-   
+            AMap.plugin("AMap.Geocoder", function () {
+              var geocoder = new AMap.Geocoder();
            
+              var lnglat = [data.position.lat, data.position.lng];
+
+              geocoder.getAddress(lnglat, function (status, result) {
+                console.log(status  , result , lnglat);
+                if (status === "complete" && result.info === "OK") {
+                  alert(result)
+                }
+              });
+            });
+            window.open(
+              `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${data.position.lat},${data.position.lng}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`
+            );
           }
 
           function onError(data) {
@@ -73,9 +84,9 @@
               console.log(position);
               // alert(r.point.lng +'======='+ r.point.lat)
 
-              window.open( `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${r.point.lat},${r.point.lng}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`); 
-   
-             
+              window.open(
+                `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${r.point.lat},${r.point.lng}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`
+              );
             } else {
               message.error("获取定位失败,请手动输入");
             }
