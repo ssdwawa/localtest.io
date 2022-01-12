@@ -46,8 +46,9 @@
           function onComplete(data) {
             // data是具体的定位信息
             console.log(data.position);
+            window.open( `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${data.position.kT},${data.position.KL}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`); 
    
-            alert(data.position.KL +'======='+ data.position.kT)
+           
           }
 
           function onError(data) {
@@ -70,15 +71,11 @@
               };
 
               console.log(position);
-              alert(r.point.lng +'======='+ r.point.lat)
+              // alert(r.point.lng +'======='+ r.point.lat)
 
-              var point = new window.BMap.Point(position.lon, position.lat);
-
-              let url;
-
-              myGeo.getLocation(point, function (result) {
-                console.log(result);
-              });
+              window.open( `https://gis.10621234.com:9081/dugis-baidu/reverse_geocoding/v3/?output=json&coordtype=wgs84ll&location=${r.point.lat},${r.point.lng}&ApiAuthorization=baidu-22646676e3b949b39a39ad5d57ffd149`); 
+   
+             
             } else {
               message.error("获取定位失败,请手动输入");
             }
