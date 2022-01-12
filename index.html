@@ -16,7 +16,7 @@
     ></script>
     <script
       type="text/javascript"
-      src="http://api.map.baidu.com/api?v=2.0&ak=kNDtRnW681B8hOVkrHGBMayOeGNZYl3V"
+      src="https://api.map.baidu.com/api?v=2.0&ak=kNDtRnW681B8hOVkrHGBMayOeGNZYl3V"
     ></script>
     <script type="text/javascript">
       function clickCheckbox() {
@@ -46,11 +46,14 @@
             // data是具体的定位信息
             console.log(data.position);
             AMap.plugin("AMap.Geocoder", function () {
-              var geocoder = new AMap.Geocoder();
+              var geocoder = new AMap.Geocoder({
+                city:"西安"
+              });
            
               var lnglat = [data.position.lat, data.position.lng];
 
               geocoder.getAddress(lnglat, function (status, result) {
+                alert(status)
                 console.log(status  , result , lnglat);
                 if (status === "complete" && result.info === "OK") {
                   alert(result)
